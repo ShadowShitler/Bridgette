@@ -1,0 +1,63 @@
+import org.gradle.internal.os.OperatingSystem
+
+plugins {
+    id 'net.ltgt.errorprone' version '0.0.8'
+    id 'edu.wpi.first.wpilib.versioning.WPILibVersioningPlugin' version '1.6'
+}
+
+allprojects {
+    repositories {
+        mavenCentral()
+    }
+}
+
+if (!hasProperty('releaseType')) {
+    WPILibVersion {
+        releaseType = 'official'
+    }
+}
+
+ext.useDriver = false
+
+ext.setupDefines = { project, binaries ->
+    binaries.all {
+        if (project.hasProperty('debug')) {
+            project.setupDebugDefines(cppCompiler, linker)
+        } else {
+            project.setupReleaseDefines(cppCompiler, linker)
+        }
+    }
+}
+
+apply from: "locations.gradle"
+
+apply from: "properties.gradle"
+
+apply from: "dependencies.gradle"
+
+apply from: "cpp.gradle"
+
+apply from: "java/java.gradle"
+
+// Empty task for build so that zips will be
+// built when running ./gradlew build
+task build
+
+apply from: "releases.gradle"
+
+apply from: "installer.gradle"
+
+task clean(type: Delete) {
+    description = "Deletes the build directory"
+    group = "Build"
+    delete buildDir
+}
+
+clean {
+    delete releaseDir
+    delete setupDir
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '3.3'
+}
