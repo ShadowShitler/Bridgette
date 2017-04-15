@@ -1,7 +1,6 @@
 package org.usfirst.frc369.Robot2017Code.commands;
 
 import org.usfirst.frc369.Robot2017Code.Robot;
-import org.usfirst.frc369.Robot2017Code.RobotMap;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -29,10 +28,10 @@ public class PlaceGearAutonomous extends CommandGroup {
         // arm
     	Robot.driveSys.shiftToLowGear();
     	addSequential(new CloseClaw());
-    	addSequential(new DriveByTime(0.25, 4.3)); //drives str
+    	addSequential(new DriveStraightToSetDistance(0.25, 105, 6.3)); //drives str
     	addSequential(new ClawOpen());
     	addSequential(new GearHandlerDown());
-    	addSequential(new DriveByTime(-0.25, 3.5));
-    	addSequential(new GearHanlderUp());
+    	addSequential(new DriveStraightToSetDistance(-0.25, 15, 3.5));
+    	addParallel(new GearHanlderUp());
     }
 }

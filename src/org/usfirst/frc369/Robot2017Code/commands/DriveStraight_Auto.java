@@ -1,7 +1,6 @@
 package org.usfirst.frc369.Robot2017Code.commands;
 
 import org.usfirst.frc369.Robot2017Code.Robot;
-import org.usfirst.frc369.Robot2017Code.RobotMap;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -28,6 +27,6 @@ public class DriveStraight_Auto extends CommandGroup {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
     	Robot.driveSys.shiftToHighGear();
-    	addSequential(new DriveByTime(0.25, 10)); 
+    	addSequential(new DriveStraightToSetDistance(0.25, 120, 30)); 
     }
 }

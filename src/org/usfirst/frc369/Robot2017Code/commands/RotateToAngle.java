@@ -17,14 +17,27 @@ public class RotateToAngle extends Command {
 
 	private double angleToAcquire = 0.0;
 	private boolean angleAcquired = false;
+	public int counter = 0;
+	public double timeout;
+	public Timer time;
 	
     public RotateToAngle(double angle) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.driveSys);
     	angleToAcquire = angle;
+    	time = new Timer();
+    	timeout = 0;
     }
-
+    
+    public RotateToAngle(double angle, double timer) {
+        // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
+    	requires(Robot.driveSys);
+    	angleToAcquire = angle;
+    	timeout = timer;
+    	time = new Timer();
+    }
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.driveSys.resetAngle();

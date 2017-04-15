@@ -2,6 +2,7 @@ package org.usfirst.frc369.Robot2017Code.commands;
 
 import org.usfirst.frc369.Robot2017Code.Robot;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -11,6 +12,8 @@ public class DriveStraightToSetDistance extends Command {
 
 	private double distanceToTravel;
 	private double travelSpeed;
+	private double timeout;
+	private Timer time;
 	
     public DriveStraightToSetDistance(double speed, double dist) {
         // Use requires() here to declare subsystem dependencies
@@ -19,13 +22,28 @@ public class DriveStraightToSetDistance extends Command {
     	requires(Robot.driveSys);
     	distanceToTravel = dist;
     	travelSpeed = speed;
+    	time = new Timer();
+    	timeout = 0;
     }
 
+    public DriveStraightToSetDistance(double speed, double dist, double timer) {
+        // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
+    	requires(Robot.dblE);
+    	requires(Robot.driveSys);
+    	distanceToTravel = dist;
+    	travelSpeed = speed;
+    	timeout = timer;
+    	time = new Timer();
+    }
+    
+    
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.dblE.reset();
     	Robot.driveSys.resetAngle();
     	Robot.dblE.setDistanceToAcquire(distanceToTravel);
+    	time.start();
     	}
 
     // Called repeatedly when this Command is scheduled to run
@@ -39,7 +57,7 @@ public class DriveStraightToSetDistance extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.dblE.didAcquireDistance();
+        return (timeout > 0 && time.hasPeriodPassed(timeout)) || Robot.dblE.didAcquireDistance();
     }
 
     // Called once after isFinished returns true
