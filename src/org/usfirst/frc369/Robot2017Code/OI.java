@@ -13,11 +13,9 @@ package org.usfirst.frc369.Robot2017Code;
 
 import org.usfirst.frc369.Robot2017Code.commands.*;
 
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.*;
-import edu.wpi.first.wpilibj.command.Command;
 
 
 /**
