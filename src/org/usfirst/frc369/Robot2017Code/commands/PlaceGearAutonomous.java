@@ -31,7 +31,7 @@ public class PlaceGearAutonomous extends CommandGroup {
     	addSequential(new DriveStraightToSetDistance(0.25, 105, 6.3)); //drives str
     	addSequential(new ClawOpen());
     	addSequential(new GearHandlerDown());
-    	addSequential(new DriveStraightToSetDistance(-0.25, 15, 3.5));
+    	addSequential(new DriveByTime(-0.25 , 3));
     	addParallel(new GearHanlderUp());
     }
 }

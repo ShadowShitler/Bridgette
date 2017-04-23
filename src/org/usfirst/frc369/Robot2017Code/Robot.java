@@ -149,11 +149,7 @@ public class Robot extends IterativeRobot {
         //driveSys.modPID(); 
         //driveSys.rotateToAngle(90);
         
-        if(SmartDashboard.getBoolean("DB/Button 0", false)){
-        	
-        }
         
-        if(joy.getRawButton(1));
         //SmartDashboard.putNumber("left encoder dist", RobotMap.leftEncoder.getDistance());
         //SmartDashboard.putNumber("right encoder dist", RobotMap.rightEncoder.getDistance());
     }

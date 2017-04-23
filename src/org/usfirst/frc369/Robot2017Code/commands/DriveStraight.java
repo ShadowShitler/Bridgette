@@ -2,7 +2,6 @@ package org.usfirst.frc369.Robot2017Code.commands;
 
 import org.usfirst.frc369.Robot2017Code.Robot;
 import edu.wpi.first.wpilibj.command.Command;
-//zhiquan.yeo@gmail.com
 /**
  *
  */
