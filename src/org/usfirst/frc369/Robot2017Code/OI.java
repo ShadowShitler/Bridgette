@@ -125,6 +125,8 @@ public class OI {
         circle2.whenPressed(new HangerClimbDown());
         circle2.whenReleased(new StopHanger());
         
+        x2.whenPressed(new GoodJobJuan());
+        
         square.whenPressed(new GearHandlerDown());
         x.whenPressed(new GearHanlderUp());
         

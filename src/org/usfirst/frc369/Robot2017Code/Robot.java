@@ -36,7 +36,7 @@ import org.usfirst.frc369.Robot2017Code.subsystems.*;
  */
 public class Robot extends IterativeRobot {
 
-	
+	String Juan;
 	int currSession;
 	int sessionfront;
 	int sessionback;
@@ -56,6 +56,7 @@ public class Robot extends IterativeRobot {
     public static Joystick joy;
     public static GyroAngleHandler gyroAngle;
     public static LED LEDSys;
+    
 
     
     
@@ -93,6 +94,7 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putNumber("right encoder dist", RobotMap.rightEncoder.getDistance());
         SmartDashboard.putNumber("left encoder get", RobotMap.leftEncoder.get());
         SmartDashboard.putNumber("right encoder get", RobotMap.rightEncoder.get());
+        SmartDashboard.putString("", Juan);
     }
 
 
