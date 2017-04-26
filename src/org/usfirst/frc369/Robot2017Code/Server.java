@@ -17,13 +17,9 @@ public class Server
    {
 	  try
 	  {
-		DatagramChannel channel = DatagramChannel.open();
+		channel = DatagramChannel.open();
 		channel.socket().bind(new InetSocketAddress(PORT));
 		channel.configureBlocking(false);  
-	  
-
-	  
-	  
 	  }
      catch( Exception e )
      {
@@ -31,8 +27,27 @@ public class Server
      }
 	  
   }
+  
+   public void get(){
+	   ByteBuffer packet = ByteBuffer.allocate(PACKETSIZE);
+	   try
+	   {
+	   
+           // Print the packet
+           byte[] bytes = new byte[packet.remaining()];
+           packet.get(bytes);
+           //java.nio.charset.StandardCharsets.UTF_8
+           System.out.println( "data: " + new String(bytes));
+           // System.out.println( packet.getAddress() + " " + packet.getPort() + ": " + new String(packet.getData(), packet.getOffset(), packet.getLength()));
+         }
+	   
+	   catch( Exception e)
+		{
+			System.out.println( e );
+		}
+   }
    
-   public void run(){
+   public void read(){
 	   
 	   ByteBuffer packet = ByteBuffer.allocate(PACKETSIZE);
 	   
