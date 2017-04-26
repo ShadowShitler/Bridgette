@@ -13,6 +13,14 @@ public class ImageProcessing extends Subsystem {
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
+    	
+    	
+    }
+    public void getDistance(){
+    	
+    }
+    public void  getCoordinates(){
+    	
     }
 }
 
