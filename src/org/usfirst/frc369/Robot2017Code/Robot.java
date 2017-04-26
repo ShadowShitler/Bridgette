@@ -56,6 +56,7 @@ public class Robot extends IterativeRobot {
     public static Joystick joy;
     public static GyroAngleHandler gyroAngle;
     public static LED LEDSys;
+    public static Server Raspi;
     
 
     
@@ -72,7 +73,7 @@ public class Robot extends IterativeRobot {
         compressor = new Compressor();						//initialize new Compressor				
         compressor.setClosedLoopControl(true);				//start compressor cycle
         LEDSys = new LED();
-        
+        Raspi = new Server();
         
         dblE = new DoubleEncoder();							//initialize new subsystem DoubleEncoders
         joy = new Joystick(2);								//joystick for testing mode
