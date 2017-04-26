@@ -1,27 +1,27 @@
 package org.usfirst.frc369.Robot2017Code.commands;
 
-import org.usfirst.frc369.Robot2017Code.Robot;
+import org.usfirst.frc369.Robot2017Code.OI.DriveModes;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class driveByJoy extends Command {
+public class NormalDrive extends Command {
 
-    public driveByJoy() {
+    public NormalDrive() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.driveSys.normalizedSpeed(Robot.oi.getLeftSpeed(), Robot.oi.getRightSpeed());
+    	DriveModes modes = DriveModes.normal;
+
     }
 
     // Make this return true when this Command no longer needs to run execute()

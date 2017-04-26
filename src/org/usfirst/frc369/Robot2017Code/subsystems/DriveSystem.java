@@ -1,5 +1,6 @@
 package org.usfirst.frc369.Robot2017Code.subsystems;
 
+import org.usfirst.frc369.Robot2017Code.Robot;
 import org.usfirst.frc369.Robot2017Code.RobotMap;
 
 //import com.kauailabs.navx.frc.AHRS;
@@ -28,7 +29,8 @@ public class DriveSystem extends Subsystem implements PIDOutput {
 	private final ADXRS450_Gyro adx_Gyro = RobotMap.gyro;						//reference drivesystem from ADXRS gyro class to new variable
 	
 	private PIDController turnController;										//PID controller variable
-	
+	static double speed;
+	static double turn;
 	static double kP = 0.034;													//P variable
 	static double kI = 0.00;													//I variable
 	static double kD = 0.00;													//D variable
@@ -40,7 +42,8 @@ public class DriveSystem extends Subsystem implements PIDOutput {
 	
 	private static boolean isAtAngle = false;									//isAtAngle variable
 	
-	private static double maxSpeed = 0.5;										//maxSpeed variable
+	private static double maxSpeed = 0.5;		
+	//maxSpeed variable
 	
 //	private EncoderHandler distanceTracker;
 	
@@ -57,6 +60,7 @@ public class DriveSystem extends Subsystem implements PIDOutput {
     private void Drive(double leftspeed, double rightspeed){
     	driveSystem.tankDrive(-leftspeed, -rightspeed); //robot tank drive with values placed in as a parameter
     }
+    
     
     //function to normalize
     public void normalizedSpeed(double left, double right){
@@ -169,7 +173,14 @@ public class DriveSystem extends Subsystem implements PIDOutput {
     public void shiftToLowGear(){
     	gearSwitcher.set(Value.kReverse);
     }
+    public void triggerSpeed(){
+    speed  = (-1*((Robot.oi.ps4_Controller.getRawAxis(4)/2) + 0.5) + ((Robot.oi.ps4_Controller.getRawAxis(3)/2) + 0.5));
+	turn = ((Robot.oi.ps4_Controller.getRawAxis(0)/2));
+	turn = speed < 0 ? turn : turn*-1;
     
+	
+	driveSystem.tankDrive(speed - turn, speed + turn);
+    }
     //returns gyro angle
  //   public double getSysAngle(){
  //   	return navX_Gyro.getAngle();

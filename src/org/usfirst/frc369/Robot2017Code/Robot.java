@@ -40,6 +40,7 @@ public class Robot extends IterativeRobot {
 	int currSession;
 	int sessionfront;
 	int sessionback;
+
 	Image frame;
     Command autonomousCommand;
     CommandGroup autoDrive;
@@ -85,7 +86,6 @@ public class Robot extends IterativeRobot {
         autoChooser.addObject("Right Peg auto", new PlaceGearOnRightPeg_Auto());
         autoChooser.addObject("Just drive straight", new DriveStraight_Auto());
         SmartDashboard.putData("Auto chooser", autoChooser);
-        
     }
     
     public void robotPeriodic() {
