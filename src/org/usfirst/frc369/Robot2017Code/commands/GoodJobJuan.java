@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  *
  */
 public class GoodJobJuan extends Command {
-	public static String Juan = " ";
+	public static String Juan;
     public GoodJobJuan() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
