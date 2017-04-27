@@ -1,69 +1,79 @@
 package org.usfirst.frc369.Robot2017Code;
 
+import java.io.IOException;
 import java.net.* ;
+import java.net.DatagramSocket;
 import java.nio.ByteBuffer;
 import java.nio.channels.DatagramChannel;
+import java.io.*;
+import java.util.Timer;
+import java.util.Date;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.Queue;
+import java.util.PriorityQueue;
 
-// import org.json.JSONObject;
-// import org.json.simple.parser.JSONParser;
 public class Server
 {
-   private final static int PACKETSIZE = 100 ;
-   private final static int PORT = 10000;
+   private final static int PACKETSIZE = 1024;
+   private final static int PORT =  10000;
    
-   DatagramChannel channel;
-   
-   public Server()
-   {
-	  try
-	  {
-		channel = DatagramChannel.open();
-		channel.socket().bind(new InetSocketAddress(PORT));
-		channel.configureBlocking(false);  
-	  }
-     catch( Exception e )
-     {
-        System.out.println( e ) ;
+   DatagramSocket socket;
+  //  ByteBuffer packet;
+  //  SocketAddress client;
+   LinkedBlockingQueue<String> latestValue;
+   Thread t;
+   byte[] receiveData;
+   public server() {
+     try{
+      socket = new DatagramSocket(PORT);
+      receiveData = new byte[256];
+      System.out.println("The server is ready... on port: "+PORT);
+      // packet = ByteBuffer.allocate(PACKETSIZE);
+      latestValue = new LinkedBlockingQueue<String>();
+     } catch(Exception ex) {
+       System.err.println("durring setup: "+ ex);
      }
-	  
-  }
-  
-   public void get(){
-	   ByteBuffer packet = ByteBuffer.allocate(PACKETSIZE);
-	   try
-	   {
-	   
-           // Print the packet
-           byte[] bytes = new byte[packet.remaining()];
-           packet.get(bytes);
-           //java.nio.charset.StandardCharsets.UTF_8
-           System.out.println( "data: " + new String(bytes));
-           // System.out.println( packet.getAddress() + " " + packet.getPort() + ": " + new String(packet.getData(), packet.getOffset(), packet.getLength()));
-         }
-	   
-	   catch( Exception e)
-		{
-			System.out.println( e );
-		}
+     t = new RuntimeThread(latestValue);
+      t.start();
    }
-   
-   public void read(){
-	   
-	   ByteBuffer packet = ByteBuffer.allocate(PACKETSIZE);
-	   
-	   try{
-	   if(channel.receive( packet ) != null) {
-           // Print the packet
-           byte[] bytes = new byte[packet.remaining()];
-           packet.get(bytes);
-           //java.nio.charset.StandardCharsets.UTF_8
-           System.out.println( "data: " + new String(bytes));
-           // System.out.println( packet.getAddress() + " " + packet.getPort() + ": " + new String(packet.getData(), packet.getOffset(), packet.getLength()));
-         }
-	   }
-	   catch(Exception e )
-	   {
-		   System.out.println( e );
-	   }
-	  }
+
+   public String getString() {
+     if(!latestValue.isEmpty()){
+      return latestValue.poll();
+     }
+     return null;
+   }
+   public Double getDouble() {
+      String s = getString();
+      if(s != null)
+        return new Double(s);
+      return null;
+   }
+
+   class RuntimeThread extends Thread {
+     private final LinkedBlockingQueue<String> v;
+     public RuntimeThread(LinkedBlockingQueue<String> callback) {
+        this.v = callback;
+     }
+     @Override
+      public void run() {
+          while(true) {
+            try {
+              DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
+              socket.receive(receivePacket);
+              String sentence = new String( receivePacket.getData());
+              v.add(sentence);
+              // System.out.println(sentence);
+              // packet.clear();
+              // socket.receive(packet);
+              // packet.flip();
+              // byte[] b = new byte[packet.limit()];
+              // packet.get(b, 0, packet.limit());
+              // latestValue = new String(b);
+            } catch(Exception ex) {
+              System.err.println("Thread Error: "+ex);
+            }
+          }
+        }
+   }
 }
