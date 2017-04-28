@@ -29,9 +29,9 @@ public class PlaceGearOnLeftPeg_Auto extends CommandGroup {
     	//	WITH THIS CODE, WE WILL HAVE TO FIND A SWEET SPOT ON THE FIELD LIKE
     	//	A LINE OR FIELD MARKING AND MODIFY THE VALUES ACCORDINLY SO THAT IT WILL WORK
     	//	ONLY VALUES WE NEED TO CHANGE IS THE ANGbyLE AND DISTANCE TO TRAVLE
-    	addSequential(new DriveByTime(0.5, 15)); //drives str
-    	addSequential(new RotateToAngle(60, 3));
-    	addSequential(new DriveByTime(0.5, 20));
+    	addSequential(new DriveByTime(0.25, 3)); //drives str
+    	addSequential(new RotateToAngle(60, 10));
+    	addSequential(new DriveByTime(0.25, 6));
     	addSequential(new ClawOpen());
     	addSequential(new GearHandlerDown());
     	addSequential(new DriveByTime(-0.25, 10));

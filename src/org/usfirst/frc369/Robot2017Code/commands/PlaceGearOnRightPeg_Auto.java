@@ -29,12 +29,12 @@ public class PlaceGearOnRightPeg_Auto extends CommandGroup {
     	//	WITH THIS CODE, WE WILL HAVE TO FIND A SWEET SPOT ON THE FIELD LIKE
     	//	A LINE OR FIELD MARKING AND MODIFY THE VALUES ACCORDINLY SO THAT IT WILL WORK
     	//	ONLY VALUES WE NEED TO CHANGE IS THE ANGLE AND DISTANCE TO TRAVLE
-    	addSequential(new DriveStraightToSetDistance(0.5, 86, 15)); //drives str
+    	addSequential(new DriveByTime(0.25, 4)); //drives str
     	addSequential(new RotateToAngle(-60, 3));
-    	addSequential(new DriveStraightToSetDistance(0.5, 20, 20));
+    	addSequential(new DriveByTime(0.25, 6));
     	addSequential(new ClawOpen());
     	addSequential(new GearHandlerDown());
-    	addSequential(new DriveStraightToSetDistance(-0.25, -30, 10));
+    	addSequential(new DriveByTime(-0.25, 10));
     	addSequential(new GearHanlderUp());
     }
     

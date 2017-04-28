@@ -31,7 +31,7 @@ Timer time;
    
     	Robot.driveSys.shiftToLowGear();
     	addSequential(new CloseClaw());
-    	addSequential(new DriveByTime(0.5, 3));
+    	addSequential(new DriveByTime(0.35, 3.5));
    		
     	//DriveStraightToSetDistance(0.25, 105, 6.3)); //drives str
     	addSequential(new GearHandlerDown());
