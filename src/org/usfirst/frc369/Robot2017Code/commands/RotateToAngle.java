@@ -47,7 +47,7 @@ public class RotateToAngle extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	// Robot.driveSys.rotateToAngle(angleToAcquire);
-    	Robot.rotateToAngleWithDrive(angleToAcquire);
+    	Robot.driveSys.rotateToAngleWithDrive(angleToAcquire);
     	/*if (Robot.driveSys.didAchievedAngle()){
     		time.start();
     		if (time.hasPeriodPassed(1)){
