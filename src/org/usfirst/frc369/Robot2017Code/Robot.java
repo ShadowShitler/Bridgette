@@ -58,6 +58,8 @@ public class Robot extends IterativeRobot {
     public static LED LEDSys;
     public static Server Raspi;
     
+ //   public static LimitGrab lim;
+    
 
     
     
@@ -95,7 +97,7 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putNumber("right encoder dist", RobotMap.rightEncoder.getDistance());
         SmartDashboard.putNumber("left encoder get", RobotMap.leftEncoder.get());
         SmartDashboard.putNumber("right encoder get", RobotMap.rightEncoder.get());
-        SmartDashboard.putString("", Juan);
+       // SmartDashboard.putString("", Juan);
     }
 
 
@@ -124,6 +126,8 @@ public class Robot extends IterativeRobot {
         if (autonomousCommand != null) autonomousCommand.cancel();
         drive = new driveByJoy();
         drive.start();
+//        lim = new LimitGrab();
+//        lim.start();
     }
 
 
@@ -131,6 +135,7 @@ public class Robot extends IterativeRobot {
         Scheduler.getInstance().run();
     	driveSys.resetAngle();
     	dblE.reset();
+    	//RobotMap.LimitSwitch.LimitGrab();
     	
     }
     
@@ -142,7 +147,7 @@ public class Robot extends IterativeRobot {
     }
     
     public void testPeriodic() {
-        Scheduler.getInstance().run();
+  //      Scheduler.getInstance().run();
         LiveWindow.run();
         //THIS COMMAND WILL UPDATE THE VALUES OF PID ACCCORDING TO THE VALUES OF THE FIRST THREE
         //SLIDERS IN THE BASIC TAB ON THE DASHBOARD. START OFF WITH P:0.03/I:0.0/D:0.0
@@ -151,8 +156,12 @@ public class Robot extends IterativeRobot {
         //AND VICE VERSA FOR IF IT SLOWS DOWN BEFORE IT HITS ITS TARGET ANGLE e.g.: 0.031 
         //driveSys.modPID(); 
         //driveSys.rotateToAngle(90);
-        
-        
+        if(SmartDashboard.getBoolean("DB/Button 0", false)){
+        	
+        }
+        if(joy.getRawButton(1))
+        	RobotMap.leftEncoder.reset();
+        SmartDashboard.putNumber("LEFT ENCODER", RobotMap.leftEncoder.getDistance());
         //SmartDashboard.putNumber("left encoder dist", RobotMap.leftEncoder.getDistance());
         //SmartDashboard.putNumber("right encoder dist", RobotMap.rightEncoder.getDistance());
     }

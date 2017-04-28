@@ -27,6 +27,6 @@ public class DriveStraight_Auto extends CommandGroup {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
     	Robot.driveSys.shiftToHighGear();
-    	addSequential(new DriveStraightToSetDistance(0.25, 120, 30)); 
+    	addSequential(new DriveByTime(0.25, 8)); 
     }
 }

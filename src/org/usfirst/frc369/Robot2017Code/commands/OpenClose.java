@@ -1,13 +1,15 @@
 package org.usfirst.frc369.Robot2017Code.commands;
 
+import org.usfirst.frc369.Robot2017Code.Robot;
+
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
  *
  */
-public class PlaceGearOnLeftPeg_Auto extends CommandGroup {
+public class OpenClose extends CommandGroup {
 
-    public PlaceGearOnLeftPeg_Auto() {
+    public OpenClose() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
@@ -24,17 +26,8 @@ public class PlaceGearOnLeftPeg_Auto extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
-    	
-    	// NOTE:
-    	//	WITH THIS CODE, WE WILL HAVE TO FIND A SWEET SPOT ON THE FIELD LIKE
-    	//	A LINE OR FIELD MARKING AND MODIFY THE VALUES ACCORDINLY SO THAT IT WILL WORK
-    	//	ONLY VALUES WE NEED TO CHANGE IS THE ANGbyLE AND DISTANCE TO TRAVLE
-    	addSequential(new DriveByTime(0.25, 3)); //drives str
-    	addSequential(new RotateToAngle(60, 10));
-    	addSequential(new DriveByTime(0.25, 6));
     	addSequential(new ClawOpen());
-    	addSequential(new GearHandlerDown());
-    	addSequential(new DriveByTime(-0.25, 10));
-    	addSequential(new GearHanlderUp());
+    	addSequential(new CloseClaw());
+    	
     }
 }
