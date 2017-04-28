@@ -23,7 +23,7 @@ public class Server
    LinkedBlockingQueue<String> latestValue;
    Thread t;
    byte[] receiveData;
-   public server() {
+   public Server() {
      try{
       socket = new DatagramSocket(PORT);
       receiveData = new byte[256];
