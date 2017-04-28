@@ -58,6 +58,10 @@ public class DriveSystem extends Subsystem implements PIDOutput {
     	driveSystem.tankDrive(-leftspeed, -rightspeed); //robot tank drive with values placed in as a parameter
     }
     
+    public void drive( double speed, double angle){
+    	driveSystem.drive(speed, angle);
+    }
+    
     //function to normalize
     public void normalizedSpeed(double left, double right){
     	if (left > RobotMap.LEFT_GO_MAX)
