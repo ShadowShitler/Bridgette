@@ -1,15 +1,15 @@
 package org.usfirst.frc369.Robot2017Code.commands;
 
 import org.usfirst.frc369.Robot2017Code.Robot;
-import org.usfirst.frc369.Robot2017Code.RobotMap;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
  *
  */
 public class PlaceGearAutonomous extends CommandGroup {
-
+Timer time;
     public PlaceGearAutonomous() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
@@ -27,12 +27,22 @@ public class PlaceGearAutonomous extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm
+    	
+   
     	Robot.driveSys.shiftToLowGear();
     	addSequential(new CloseClaw());
-    	addSequential(new DriveByTime(0.25, 4.3)); //drives str
-    	addSequential(new ClawOpen());
+    	addSequential(new DriveByTime(0.35, 3.5));
+   		
+    	//DriveStraightToSetDistance(0.25, 105, 6.3)); //drives str
     	addSequential(new GearHandlerDown());
-    	addSequential(new DriveByTime(-0.25, 3.5));
-    	addSequential(new GearHanlderUp());
-    }
+    	addSequential(new ClawOpen());
+    	addParallel(new GearHanlderUp());    	
+    	addSequential(new DriveByTime(-0.25 , 3));
+
+//    	addSequential(new ClawOpen());
+//    	addSequential(new GearHandlerDown());
+    	
+    
+    
+    }	
 }

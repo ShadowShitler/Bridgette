@@ -1,8 +1,8 @@
 package org.usfirst.frc369.Robot2017Code.commands;
 
-import java.awt.event.ActionEvent;
+//import java.awt.event.ActionEvent;
 
-import javax.swing.AbstractAction;
+//import javax.swing.AbstractAction;
 
 import org.usfirst.frc369.Robot2017Code.Robot;
 
@@ -17,23 +17,37 @@ public class RotateToAngle extends Command {
 
 	private double angleToAcquire = 0.0;
 	private boolean angleAcquired = false;
+	public int counter = 0;
+	public double timeout;
+	public Timer time;
 	
     public RotateToAngle(double angle) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.driveSys);
     	angleToAcquire = angle;
+    	time = new Timer();
+    	timeout = 0;
     }
-
+    
+    public RotateToAngle(double angle, double timer) {
+        // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
+    	requires(Robot.driveSys);
+    	angleToAcquire = angle;
+    	timeout = timer;
+    	time = new Timer();
+    }
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.driveSys.resetAngle();
+    	time.start();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	Robot.driveSys.rotateToAngle(angleToAcquire);
-    	Timer time = new Timer();
+    	
     	/*if (Robot.driveSys.didAchievedAngle()){
     		time.start();
     		if (time.hasPeriodPassed(1)){
@@ -49,7 +63,7 @@ public class RotateToAngle extends Command {
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
     	SmartDashboard.putBoolean("CMD ANGLE ACHIEVED", angleAcquired);
-        return angleAcquired;
+        return (timeout > 0 && time.hasPeriodPassed(timeout)) || angleAcquired;
     }
 
     // Called once after isFinished returns true
