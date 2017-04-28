@@ -56,7 +56,8 @@ public class Robot extends IterativeRobot {
     public static Joystick joy;
     public static GyroAngleHandler gyroAngle;
     public static LED LEDSys;
-    public static Server Raspi;
+ //   public static Server Raspi;
+    public static ImageProcessing vision;
     
  //   public static LimitGrab lim;
     
@@ -71,11 +72,11 @@ public class Robot extends IterativeRobot {
     	robotHanger = new RobotHanger(); 					//initialize new subsystem robothanger
         driveSys = new DriveSystem();						//initialize new subsystem DriveSystem
         gearHandler = new GearHandler();					//initialize new subsystem RobotHanger
-        
+        vision = new ImageProcessing();
         compressor = new Compressor();						//initialize new Compressor				
         compressor.setClosedLoopControl(true);				//start compressor cycle
         LEDSys = new LED();
-        Raspi = new Server();
+//        Raspi = new Server();
         
         dblE = new DoubleEncoder();							//initialize new subsystem DoubleEncoders
         joy = new Joystick(2);								//joystick for testing mode
@@ -97,7 +98,8 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putNumber("right encoder dist", RobotMap.rightEncoder.getDistance());
         SmartDashboard.putNumber("left encoder get", RobotMap.leftEncoder.get());
         SmartDashboard.putNumber("right encoder get", RobotMap.rightEncoder.get());
-       // SmartDashboard.putString("", Juan);
+        SmartDashboard.putNumber("server",Robot.vision.getangle());
+        // SmartDashboard.putString("", Juan);
     }
 
 

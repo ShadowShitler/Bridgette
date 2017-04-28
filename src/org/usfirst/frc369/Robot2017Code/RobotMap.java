@@ -51,6 +51,8 @@ public class RobotMap {
     
     public static  Relay LEDSys;
     
+    public static Server server;
+    
    // public static DigitalInput LimitSwitch;
     
     //constants lg = 0.87, rg = 0.90, lb = -0.90, rb = -0.87
@@ -99,6 +101,8 @@ public class RobotMap {
         LEDSys = new Relay(1);
         
         gyro = new ADXRS450_Gyro();
+        
+        server = new Server();
         
   //      LimitSwitch = new DigitalInput(0);
         
