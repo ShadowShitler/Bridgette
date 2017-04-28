@@ -133,7 +133,10 @@ public class DriveSystem extends Subsystem implements PIDOutput {
     	}
     	
     }
-    
+
+    public void rotateToAngleWithDrive(Double angle) {
+        driveSystem.drive(0, (-adx_Gyro.getAngle()*0.005) - angle );
+    }
     //function to modify pid values for testing purposes
     //to write to individual slots in the basic tab on the dashboard:
     //SmartDashboard.putString("DB/String #slotnumber#", #string#);
