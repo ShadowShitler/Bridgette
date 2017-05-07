@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class ImageProcessing extends Subsystem {
 
+	public Double lastValue = 0.0;
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 
@@ -21,7 +22,7 @@ public class ImageProcessing extends Subsystem {
     public Double getangle(){
     	Double value = RobotMap.server.getDouble();
     	if (value == null){
-    		return 0.0;
+    		value = lastValue;
     	}
     	return value;
     }

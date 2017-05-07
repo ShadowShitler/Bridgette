@@ -58,6 +58,15 @@ public class DriveSystem extends Subsystem implements PIDOutput {
     	driveSystem.tankDrive(-leftspeed, -rightspeed); //robot tank drive with values placed in as a parameter
     }
     
+    public void tankDrive(double left, double right) {
+    	driveSystem.tankDrive(left, right);
+    }
+    
+    public void turn(double angle) {
+    	if(adx_Gyro.getAngle() < angle) {
+    		driveSystem.tankDrive(0.2, -0.2);
+    	}
+    }
     public void drive( double speed, double angle){
     	driveSystem.drive(speed, angle);
     }
@@ -101,7 +110,7 @@ public class DriveSystem extends Subsystem implements PIDOutput {
     
     public void driveStraight(double speed){
         try {
-            	driveSystem.drive(speed, -adx_Gyro.getAngle()*0.005);
+            	driveSystem.drive(speed, -adx_Gyro.getAngle()*0.08);
         } catch( RuntimeException ex ) {
             DriverStation.reportError("Error communicating with drive system:  " + ex.getMessage(), true);
         }
@@ -139,7 +148,7 @@ public class DriveSystem extends Subsystem implements PIDOutput {
     }
 
     public void rotateToAngleWithDrive(Double angle) {
-        driveSystem.drive(0, (-adx_Gyro.getAngle()*0.005) - angle );
+        driveSystem.drive(0.05, (-adx_Gyro.getAngle()*0.005) - angle );
     }
     //function to modify pid values for testing purposes
     //to write to individual slots in the basic tab on the dashboard:

@@ -72,7 +72,7 @@ public class Robot extends IterativeRobot {
     	robotHanger = new RobotHanger(); 					//initialize new subsystem robothanger
         driveSys = new DriveSystem();						//initialize new subsystem DriveSystem
         gearHandler = new GearHandler();					//initialize new subsystem RobotHanger
-        vision = new ImageProcessing();
+       // vision = new ImageProcessing();
         compressor = new Compressor();						//initialize new Compressor				
         compressor.setClosedLoopControl(true);				//start compressor cycle
         LEDSys = new LED();
@@ -87,6 +87,7 @@ public class Robot extends IterativeRobot {
         autoChooser.addObject("Left Peg auto", new PlaceGearOnLeftPeg_Auto());
         autoChooser.addObject("Right Peg auto", new PlaceGearOnRightPeg_Auto());
         autoChooser.addObject("Just drive straight", new DriveStraight_Auto());
+        autoChooser.addObject("rotate", new RotateToAngle_Auto());
         SmartDashboard.putData("Auto chooser", autoChooser);
         
     }
@@ -98,7 +99,7 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putNumber("right encoder dist", RobotMap.rightEncoder.getDistance());
         SmartDashboard.putNumber("left encoder get", RobotMap.leftEncoder.get());
         SmartDashboard.putNumber("right encoder get", RobotMap.rightEncoder.get());
-        SmartDashboard.putNumber("server",Robot.vision.getangle());
+  //      SmartDashboard.putNumber("server",Robot.vision.getangle());
         // SmartDashboard.putString("", Juan);
     }
 

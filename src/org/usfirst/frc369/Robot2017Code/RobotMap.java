@@ -102,7 +102,7 @@ public class RobotMap {
         
         gyro = new ADXRS450_Gyro();
         
-        server = new Server();
+   //     server = new Server();
         
   //      LimitSwitch = new DigitalInput(0);
         
